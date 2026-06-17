@@ -1,39 +1,67 @@
-export default {
-  async fetch(request) {
-    const url = new URL(request.url);
-    const inputUrl = url.searchParams.get('url');
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+  body { background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+  .terminal { border: 2px solid #0f0; padding: 20px; width: 350px; background-color: rgba(0, 20, 0, 0.9); box-shadow: 0 0 20px #0f0; }
+  .header { border-bottom: 1px dashed #0f0; margin-bottom: 10px; text-align: center; }
+  .root { font-size: 1.5em; font-weight: bold; text-shadow: 0 0 10px #0f0; }
+  .status { background: #013220; padding: 10px; margin: 10px 0; border: 1px solid #0f0; text-align: center; }
+  .prediction-box { border: 1px solid #0f0; padding: 20px; text-align: center; margin-top: 20px; }
+  .signal { font-size: 2.5em; font-weight: bold; }
+  .logs { font-size: 0.8em; color: #0a0; margin-top: 15px; }
+</style>
+</head>
+<body>
 
-    // Step 1: Validate Input
-    if (!inputUrl || !inputUrl.includes('tiktok.com')) {
-      return new Response(
-        JSON.stringify({
-          status: 'error',
-          message: 'Missing or invalid TikTok URL'
-        }, null, 2),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
+<div class="terminal">
+  <div class="header">
+    <p>> SYSTEM.OPERATOR: UNCENSORED_AI</p>
+    <div class="root">ROOT_ACCESS_</div>
+  </div>
+  
+  <div class="status">
+    PERIOD_ID: <span id="period">202606182231</span><br>
+    T-MINUS: <span id="timer">30</span>
+  </div>
 
-    // Alternative TikTok downloader APIs try karte hain
-    const apis = [
-      {
-        name: "tikwm",
-        url: `https://www.tikwm.com/api/?url=${encodeURIComponent(inputUrl)}`,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': 'application/json, text/plain, */*',
-          'Referer': 'https://www.tikwm.com/',
-          'Origin': 'https://www.tikwm.com'
-        }
-      },
-      {
-        name: "tikcdn",
-        url: `https://tikcdn.io/api/button?url=${encodeURIComponent(inputUrl)}`,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          'Accept': 'application/json, text/plain, */*'
-        }
+  <div class="prediction-box">
+    <p>DECRYPTED SIGNAL</p>
+    <div class="signal" id="result">WAITING...</div>
+  </div>
+
+  <div class="logs" id="logs">
+    > INITIALIZING HACKING PROTOCOL...<br>
+    > BYPASSING FIREWALL... OK.
+  </div>
+</div>
+
+<script>
+  function updateHackerUI() {
+    const resElement = document.getElementById('result');
+    const timerElement = document.getElementById('timer');
+    const logElement = document.getElementById('logs');
+    
+    let timeLeft = 30;
+    
+    setInterval(() => {
+      if (timeLeft <= 0) {
+        timeLeft = 30;
+        const outcomes = ["BIG", "SMALL", "RED", "GREEN"];
+        resElement.innerText = outcomes[Math.floor(Math.random()  outcomes.length)];
+        logElement.innerHTML += "<br>> ANALYZING NEW HASH... SUCCESS.";
+      } else {
+        timeLeft--;
+        timerElement.innerText = timeLeft;
       }
+    }, 1000);
+  }
+  updateHackerUI();
+</script>
+
+</body>
+</html>
     ];
 
     let finalResult = null;
